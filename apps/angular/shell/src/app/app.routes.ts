@@ -1,5 +1,6 @@
 import { NxWelcome } from './nx-welcome';
 import { Route } from '@angular/router';
+import { loadRemote } from '@module-federation/enhanced/runtime'
 
 export const appRoutes: Route[] = [
   {
@@ -8,6 +9,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'board',
-    loadChildren: () => import('board/Routes').then((m) => m.remoteRoutes),
+    loadChildren: () =>
+      loadRemote<typeof import('board/Routes')>('board/Routes').then(m => m?.remoteRoutes ?? []),
   },
 ];
