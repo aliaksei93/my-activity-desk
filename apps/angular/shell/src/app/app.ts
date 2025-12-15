@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Component({
   imports: [RouterModule],
@@ -9,4 +10,6 @@ import { RouterModule } from '@angular/router';
 })
 export class App {
   protected title = 'shell';
+
+  public environment = environment;
 }
