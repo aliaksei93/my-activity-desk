@@ -1,44 +1,134 @@
-name: CI
+name: CI/CD
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
+    branches: [ develop, main ]
+  push:
+    branches: [ develop ]
+    tags:
+      - 'v*'   # deploy by tag v0.1.0 и т.п.
 
-permissions:
-  actions: read
-  contents: read
+env:
+  REGISTRY: ghcr.io
+  IMAGE_SHELL: my-desk-shell-frontend
+  IMAGE_BOARD: my-desk-board-frontend
 
 jobs:
-  main:
+  # ---------- CI for PR: lint + test ----------
+  ci:
+    name: Lint & Test (PR + develop)
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/develop'
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          filter: tree:0
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      
-      # This enables task distribution via Nx Cloud
-      # Run this command as early as possible, before dependencies are installed
-      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-      # Uncomment this line to enable task distribution
-      # - run: npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
-
-      
-      # Cache node_modules
-      - uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '22'
           cache: 'npm'
-       
-      - run: npm ci
 
+      - name: Install dependencies
+        run: npm ci
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      - run: npx nx run-many -t lint test build
-      # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
-      - run: npx nx fix-ci
-        if: always()
+      - name: Lint shell & board
+        run: |
+          npx nx lint shell
+          npx nx lint board
+
+      - name: Test shell & board
+        run: |
+          npx nx test shell --ci --code-coverage=false
+          npx nx test board --ci --code-coverage=false
+
+  # ---------- CI/CD for tags ----------
+  build-and-deploy:
+    name: Build, Test, Docker, Deploy (tag)
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint + Test
+      - name: Lint shell & board
+        run: |
+          npx nx lint shell
+          npx nx lint board
+
+      - name: Test shell & board
+        run: |
+          npx nx test shell --ci --code-coverage=false
+          npx nx test board --ci --code-coverage=false
+
+      # Optional: build before Docker (boost debug)
+      - name: Build shell & board
+        run: |
+          npx nx build shell --configuration=production
+          npx nx build board --configuration=production
+
+      # ----- Docker login to GHCR -----
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set image tags
+        id: meta
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/}"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Build and push shell image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/shell.dockerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_SHELL }}:${{ steps.meta.outputs.VERSION }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_SHELL }}:latest
+          build-args: |
+            APP_NAME=shell
+
+      - name: Build and push board image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/board.dockerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_BOARD }}:${{ steps.meta.outputs.VERSION }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_BOARD }}:latest
+          build-args: |
+            APP_NAME=board
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.OMV_HOST }}
+          port: 333
+          username: ${{ secrets.OMV_USER }}
+          key: ${{ secrets.OMV_SSH_KEY }}
+          script: |
+            cd ${{ secrets.OMV_DOCKER_COMPOSE_PATH }}
+            docker compose pull my-desk-shell-frontend my-desk-board-frontend
+            docker compose up -d my-desk-shell-frontend my-desk-board-frontend
