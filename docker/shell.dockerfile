@@ -1,12 +1,13 @@
 # Stage 1: build Angular
 FROM node:22.19.0-alpine AS build
 
-ARG APP_NAME=shell
 ARG WEB_APP_API_BASE_URL
-ARG WEB_APP_ENV_TARGET_PATH=./apps/angular/shell/src/environments/environment.ts
+ARG WEB_APP_BOARD_REMOTE_URL
+ARG GIT_COMMIT
 
-ENV WEB_APP_API_BASE_URL "$WEB_APP_API_BASE_URL"
-ENV WEB_APP_ENV_TARGET_PATH "$WEB_APP_ENV_TARGET_PATH"
+ENV WEB_APP_API_BASE_URL=$WEB_APP_API_BASE_URL
+ENV WEB_APP_BOARD_REMOTE_URL=$WEB_APP_BOARD_REMOTE_URL
+ENV GIT_COMMIT=$GIT_COMMIT
 
 WORKDIR /repo
 
@@ -21,24 +22,22 @@ COPY tools ./tools
 
 RUN npm ci
 
-RUN cp ./tools/set-env.ts ./set-env.ts
+RUN cp ./tools/set-env.shell.ts ./set-env.ts
 RUN npx ts-node --transpile-only --compiler-options '{"module":"CommonJS"}' ./set-env.ts --trace-warnings
 
 # build app
-RUN npx nx build ${APP_NAME} --configuration=production
+RUN npx nx build shell --configuration=production
 
 # Stage 2: serve with nginx
 FROM nginx:alpine
 
-ARG APP_NAME=shell
-
 ## Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=build /repo/nginx/shell.nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /repo/dist/apps/angular/${APP_NAME} /usr/share/nginx/html/
-COPY --from=build /repo/tools/replace_api_url.sh /
+COPY --from=build /repo/nginx/web.nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /repo/dist/apps/angular/shell /usr/share/nginx/html/
+COPY --from=build /repo/tools/replace_api_url.shell.sh /
 
 EXPOSE 80
 
-CMD ["sh", "replace_api_url.sh"]
+CMD ["sh", "replace_api_url.shell.sh"]
