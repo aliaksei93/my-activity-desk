@@ -3,9 +3,12 @@ FROM node:22.19.0-alpine AS build
 
 ARG APP_NAME=shell
 ARG WEB_APP_API_BASE_URL
+ARG WEB_APP_BOARD_REMOTE_URL
 ARG WEB_APP_ENV_TARGET_PATH=./apps/angular/shell/src/environments/environment.ts
+ARG WEB_APP_MANIFEST_TARGET_PATH=./apps/angular/shell/public/module-federation.manifest.json
 
 ENV WEB_APP_API_BASE_URL "$WEB_APP_API_BASE_URL"
+ENV WEB_APP_BOARD_REMOTE_URL "$WEB_APP_BOARD_REMOTE_URL"
 ENV WEB_APP_ENV_TARGET_PATH "$WEB_APP_ENV_TARGET_PATH"
 
 WORKDIR /repo
