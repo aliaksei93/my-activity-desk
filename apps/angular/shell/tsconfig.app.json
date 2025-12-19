@@ -5,7 +5,7 @@
     "types": [],
     "target": "ES2020"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "mf-fallback-plugin.ts"],
   "exclude": [
     "jest.config.ts",
     "src/test-setup.ts",

@@ -6,8 +6,15 @@
   "sourceRoot": "apps/angular/shell/src",
   "tags": [],
   "targets": {
+    "set-version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/set-version.js angular/shell"
+      }
+    },
     "build": {
       "executor": "@nx/angular:webpack-browser",
+      "dependsOn": ["set-version"],
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/angular/shell",
@@ -25,7 +32,8 @@
         "styles": ["apps/angular/shell/src/styles.scss"],
         "customWebpackConfig": {
           "path": "apps/angular/shell/webpack.config.ts"
-        }
+        },
+        "allowedCommonJsDependencies": ["@module-federation/enhanced/runtime"]
       },
       "configurations": {
         "production": {
@@ -60,6 +68,7 @@
     "serve": {
       "continuous": true,
       "executor": "@nx/angular:module-federation-dev-server",
+      "dependsOn": ["set-version"],
       "options": {
         "port": 4200,
         "publicHost": "http://localhost:4200"
@@ -85,6 +94,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
+      "dependsOn": ["set-version"],
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/angular/shell/jest.config.ts",
