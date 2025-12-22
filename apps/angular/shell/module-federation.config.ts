@@ -15,6 +15,12 @@ const config: ModuleFederationConfig = {
    *
    */
   remotes: [],
+  shared: (libraryName) => {
+    if (libraryName.startsWith('@my-activity-desk/shell')) {
+      return false;
+    }
+    return undefined;
+  },
 };
 
 /**

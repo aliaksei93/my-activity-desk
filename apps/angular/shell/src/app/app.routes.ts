@@ -4,6 +4,11 @@ import { loadRemote } from '@module-federation/enhanced/runtime';
 
 export const appRoutes: Route[] = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'shell',
+  },
+  {
     path: 'shell',
     component: NxWelcome,
   },
@@ -12,7 +17,8 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       loadRemote<typeof import('board/Routes')>('board/Routes')
         .then((m) => m?.remoteRoutes ?? [])
-        .catch(() => {
+        .catch((err) => {
+          console.error('[MF] Failed to load board', err);
           return [];
         }),
   },
