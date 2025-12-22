@@ -11,8 +11,7 @@ WORKDIR /repo
 COPY package*.json ./
 COPY nx.json tsconfig.base.json ./
 COPY apps ./apps
-#COPY libs ./libs
-#COPY docker ./docker
+COPY libs ./libs
 COPY nginx ./nginx
 COPY tools ./tools
 

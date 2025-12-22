@@ -12,7 +12,7 @@ import { buildDate, commitHash } from '../environments/version';
 export class App implements OnInit {
   protected title = 'shell';
 
-  public environment = environment;
+  public env = environment;
 
   public ngOnInit(): void {
     console.log(`MyActivityBoard [shell] build commit: ${commitHash}, built at: ${buildDate}`);

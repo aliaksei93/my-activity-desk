@@ -15,9 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "board/Routes": [
-        "apps/angular/board/src/app/remote-entry/entry.routes.ts"
-      ]
+      "board/Routes": ["apps/angular/board/src/app/remote-entry/entry.routes.ts"],
+      "@my-activity-desk/shell/mf": ["libs/shell/mf/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
