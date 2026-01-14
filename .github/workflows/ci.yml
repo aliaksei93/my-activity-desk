@@ -133,3 +133,4 @@ jobs:
             cd ${{ secrets.OMV_DOCKER_COMPOSE_PATH }}
             docker compose --env-file my-desk-frontend.env -f my-desk-frontend.yml pull my-desk-shell-frontend my-desk-board-frontend
             docker compose --env-file my-desk-frontend.env -f my-desk-frontend.yml up -d my-desk-shell-frontend my-desk-board-frontend
+            docker exec nginx-proxy nginx -s reload
