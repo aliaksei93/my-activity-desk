@@ -1,0 +1,43 @@
+{
+  "name": "storybook-angular",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/storybook/angular",
+  "targets": {
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4600,
+        "open": false,
+        "configDir": "apps/storybook/angular/.storybook",
+        "browserTarget": "storybook-angular:build-storybook",
+        "tsConfig": "apps/storybook/angular/tsconfig.json",
+        "compodoc": false
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/angular",
+        "configDir": "apps/storybook/angular/.storybook",
+        "browserTarget": "storybook-angular:build-storybook",
+        "compodoc": false,
+        "tsConfig": "apps/storybook/angular/tsconfig.json",
+        "styles": ["libs/design/tokens/src/styles/storybook.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/design/tokens/src/styles"]
+        },
+        "assets": [],
+        "sourceMap": true,
+        "preserveSymlinks": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": ["scope:storybook", "type:app"]
+}

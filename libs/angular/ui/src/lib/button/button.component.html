@@ -1,0 +1,15 @@
+<button
+  class="ui-button"
+  [class.ui-button--text]="variant === 'text'"
+  [class.ui-button--filled]="variant === 'filled'"
+  [class.ui-button--outlined]="variant === 'outlined'"
+  [class.ui-button--elevated]="variant === 'elevated'"
+  [class.ui-button--primary]="color === 'primary'"
+  [class.ui-button--neutral]="color === 'neutral'"
+  [class.ui-button--danger]="color === 'danger'"
+  [disabled]="disabled"
+  [type]="type"
+  [attr.aria-label]="ariaLabel || label"
+>
+  {{ label }}
+</button>

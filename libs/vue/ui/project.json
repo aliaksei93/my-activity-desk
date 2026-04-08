@@ -1,0 +1,7 @@
+{
+  "name": "vue-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/vue/ui/src",
+  "tags": ["scope:ui", "framework:vue"]
+}

@@ -1,0 +1,43 @@
+@mixin ui-theme() {
+  :root {
+    --ui-color-text: #1c1b1f;
+    --ui-color-text-muted: #5f5c64;
+    --ui-color-bg: #fafafa;
+    --ui-color-surface: #ffffff;
+    --ui-color-surface-strong: #27242c;
+    --ui-color-on-surface-strong: #f8f7fa;
+    --ui-color-border: #ded8e4;
+
+    --ui-color-primary: #1e5eff;
+    --ui-color-on-primary: #ffffff;
+    --ui-color-primary-soft: #e8efff;
+    --ui-color-primary-ring: rgba(30, 94, 255, 0.24);
+
+    --ui-color-danger: #d6242c;
+    --ui-color-on-danger: #ffffff;
+    --ui-color-danger-soft: #ffe7ea;
+
+    --ui-shadow-1: 0 6px 16px rgba(28, 27, 31, 0.12);
+  }
+
+  :root[data-theme='dark'] {
+    --ui-color-text: #f4f1f6;
+    --ui-color-text-muted: #b4adbc;
+    --ui-color-bg: #121212;
+    --ui-color-surface: #1e1b22;
+    --ui-color-surface-strong: #f4f1f6;
+    --ui-color-on-surface-strong: #1c1b1f;
+    --ui-color-border: #3b3642;
+
+    --ui-color-primary: #8eacff;
+    --ui-color-on-primary: #12131a;
+    --ui-color-primary-soft: #1c2746;
+    --ui-color-primary-ring: rgba(142, 172, 255, 0.28);
+
+    --ui-color-danger: #ff8a91;
+    --ui-color-on-danger: #2b0f12;
+    --ui-color-danger-soft: #3b1f23;
+
+    --ui-shadow-1: 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+}

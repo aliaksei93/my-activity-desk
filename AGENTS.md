@@ -18,11 +18,27 @@
 - `npx nx e2e shell-e2e` or `npx nx e2e board-e2e` runs Cypress e2e tests (targets may be inferred).
 - `npx nx graph` visualizes project dependencies.
 
+## Nx in sandboxed environments
+> Only relevant when running inside restricted/sandboxed execution environments.
+
+- Sandbox blocks IPC sockets ⇒ Nx daemon/plugin workers may fail (`listen EPERM`).
+- In the sandbox, always run Nx with env flags:
+  - `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx ...`
+  - (or `source ./tools/nx-sandbox-env.sh`; alias `nx` inside).
+- Do not apply these env flags outside a sandbox unless needed.
+- If you need daemon/isolation, request unsandboxed command execution.
+
 ## Coding Style & Naming Conventions
 - Indentation: 2 spaces (see `.editorconfig`).
 - Language: TypeScript for app/lib code, SCSS for styles.
 - Use kebab-case for project and folder names (example: `shell-e2e`).
 - Format with Prettier (`.prettierrc`) and lint with ESLint (`eslint.config.mjs`).
+
+## Angular Template Syntax
+- For all new/updated Angular templates, use built-in control flow blocks: `@if`, `@for`, `@switch`.
+- Avoid legacy structural directive microsyntax (`*ngIf`, `*ngFor`, `*ngSwitchCase`) in new edits.
+- In standalone components, remove `NgIf`/`NgFor`/`NgSwitch*` imports when templates use built-in control flow.
+- Always specify `track` in `@for` loops (prefer stable key; fallback to `$index` if needed).
 
 ## Testing Guidelines
 - Unit tests use Jest with `jest-preset-angular` and live alongside code as `*.spec.ts`.

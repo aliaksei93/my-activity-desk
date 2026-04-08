@@ -1,0 +1,7 @@
+{
+  "name": "angular-forms",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/angular/forms/src",
+  "tags": ["scope:forms", "framework:angular"]
+}

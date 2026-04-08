@@ -1,0 +1,13 @@
+{
+  "extends": "../../../tsconfig.angular.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc",
+    "types": []
+  },
+  "include": [
+    ".storybook/**/*.ts",
+    "../../../libs/angular/**/*.stories.ts",
+    "../../../libs/angular/**/src/**/*.ts"
+  ],
+  "exclude": ["../../../libs/**/*.spec.ts", "../../../libs/**/*.test.ts"]
+}

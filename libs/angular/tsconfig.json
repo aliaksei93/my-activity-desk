@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.angular.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": []
+  },
+  "include": ["**/*.stories.ts", "**/src/**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
+}
