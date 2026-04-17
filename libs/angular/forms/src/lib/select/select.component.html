@@ -1,0 +1,24 @@
+<label class="ui-select">
+  @if (label) {
+    <span class="ui-select__label">{{ label }}</span>
+  }
+  <select
+    class="ui-select__control"
+    [disabled]="disabled"
+    [required]="required"
+    [value]="selectedIndex"
+    [attr.aria-invalid]="!!error"
+    (change)="onSelectChange($event)"
+  >
+    @for (option of options; track $index) {
+      <option [value]="$index">
+        {{ option.label }}
+      </option>
+    }
+  </select>
+  @if (error) {
+    <span class="ui-select__error">{{ error }}</span>
+  } @else if (hint) {
+    <span class="ui-select__hint">{{ hint }}</span>
+  }
+</label>

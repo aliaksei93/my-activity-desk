@@ -30,6 +30,9 @@
           }
         ],
         "styles": ["apps/angular/shell/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/design/tokens/src/styles"]
+        },
         "customWebpackConfig": {
           "path": "apps/angular/shell/webpack.config.ts"
         },

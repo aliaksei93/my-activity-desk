@@ -24,7 +24,10 @@ export class App implements OnInit {
   private prefetchRemotes(): void {
     REMOTES.filter((remote) => remote.preload).forEach((remote) => {
       const remoteId = `${remote.key}/${remote.exposed}`;
-      loadRemote(remoteId)
+
+      // Normalizes both sync throws and rejected promises from loadRemote into one catch path.
+      Promise.resolve()
+        .then(() => loadRemote(remoteId))
         .then(() => {
           console.info(`[MF] Prefetch remote ${remote.key} ok`);
         })

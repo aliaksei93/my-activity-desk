@@ -23,6 +23,9 @@
           }
         ],
         "styles": ["apps/angular/board/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/design/tokens/src/styles"]
+        },
         "customWebpackConfig": {
           "path": "apps/angular/board/webpack.config.ts"
         }

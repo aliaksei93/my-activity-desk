@@ -1,0 +1,27 @@
+:host {
+  display: inline-flex;
+}
+
+.ui-checkbox {
+  align-items: center;
+  color: var(--ui-color-text);
+  cursor: pointer;
+  display: inline-flex;
+  gap: var(--ui-space-2);
+}
+
+.ui-checkbox__control {
+  accent-color: var(--ui-color-primary);
+  block-size: 16px;
+  inline-size: 16px;
+  margin: 0;
+}
+
+.ui-checkbox__label {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.ui-checkbox__control:disabled + .ui-checkbox__label {
+  opacity: 0.6;
+}

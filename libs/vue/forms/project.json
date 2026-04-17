@@ -1,0 +1,7 @@
+{
+  "name": "vue-forms",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/vue/forms/src",
+  "tags": ["scope:forms", "framework:vue"]
+}

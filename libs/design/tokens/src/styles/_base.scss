@@ -1,0 +1,21 @@
+@mixin ui-base() {
+  :root {
+    --ui-radius-sm: 6px;
+    --ui-radius-md: 10px;
+    --ui-radius-lg: 16px;
+
+    --ui-space-1: 4px;
+    --ui-space-2: 8px;
+    --ui-space-3: 12px;
+    --ui-space-4: 16px;
+    --ui-space-5: 20px;
+    --ui-space-6: 24px;
+  }
+
+  body {
+    font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    color: var(--ui-color-text);
+    background: var(--ui-color-bg);
+  }
+}
