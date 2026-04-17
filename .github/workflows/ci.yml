@@ -2,11 +2,11 @@ name: CI/CD
 
 on:
   pull_request:
-    branches: [ develop, main ]
+    branches: [develop, main]
   push:
-    branches: [ develop ]
+    branches: [develop]
     tags:
-      - 'v*'   # deploy by tag v0.1.0 и т.п.
+      - 'v*' # deploy by tag v0.1.0 и т.п.
 
 env:
   REGISTRY: ghcr.io
@@ -32,6 +32,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint styles
+        run: npm run lint:styles
 
       - name: Lint shell & board
         run: |
@@ -67,6 +70,9 @@ jobs:
         run: npm ci
 
       # Lint + Test
+      - name: Lint styles
+        run: npm run lint:styles
+
       - name: Lint shell & board
         run: |
           npx nx lint shell

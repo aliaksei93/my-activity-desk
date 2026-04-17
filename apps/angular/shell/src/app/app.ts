@@ -9,7 +9,6 @@ import { buildDate, commitHash } from '../environments/version';
   imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.scss',
 })
 export class App implements OnInit {
   protected title = 'shell';

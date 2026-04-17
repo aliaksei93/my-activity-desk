@@ -1,0 +1,5 @@
+{
+  "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}": "eslint --cache --fix",
+  "*.{css,scss}": "stylelint --fix --allow-empty-input",
+  "*.{html,json,md,yml,yaml}": "prettier --write"
+}

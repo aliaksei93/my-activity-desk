@@ -13,14 +13,13 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "board/Routes": ["apps/angular/board/src/app/remote-entry/entry.routes.ts"],
-      "@my-activity-desk/shell/mf": ["libs/shell/mf/src/index.ts"],
-      "@my-activity-desk/design-tokens": ["libs/design/tokens/src/index.ts"],
-      "@my-activity-desk/angular/*": ["libs/angular/*/src/index.ts"],
-      "@my-activity-desk/react/*": ["libs/react/*/src/index.ts"],
-      "@my-activity-desk/vue/*": ["libs/vue/*/src/index.ts"],
+      "board/Routes": ["./apps/angular/board/src/app/remote-entry/entry.routes.ts"],
+      "@my-activity-desk/shell/mf": ["./libs/shell/mf/src/index.ts"],
+      "@my-activity-desk/design-tokens": ["./libs/design/tokens/src/index.ts"],
+      "@my-activity-desk/angular/*": ["./libs/angular/*/src/index.ts"],
+      "@my-activity-desk/react/*": ["./libs/react/*/src/index.ts"],
+      "@my-activity-desk/vue/*": ["./libs/vue/*/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,29 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "rules": {
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["font-smoothing", "osx-font-smoothing", "overflow-style", "touch-callout"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ],
+    "selector-no-vendor-prefix": [
+      true,
+      {
+        "ignoreSelectors": [
+          "::-webkit-input-placeholder",
+          "::-moz-placeholder",
+          ":-ms-input-placeholder",
+          ":-moz-placeholder"
+        ]
+      }
+    ],
+    "selector-class-pattern": "^[a-z][a-z0-9]*(?:[-_][a-z0-9]+)*(?:(?:__(?:[a-z0-9]+(?:[-_][a-z0-9]+)*))|(?:--(?:[a-z0-9]+(?:[-_][a-z0-9]+)*)))*$"
+  }
+}
