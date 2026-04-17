@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ type RemoteErrorData = {
 @Component({
   selector: 'shell-remote-unavailable',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <section class="remote-unavailable">
       <h2>{{ title }}</h2>

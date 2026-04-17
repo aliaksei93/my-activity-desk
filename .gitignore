@@ -47,3 +47,6 @@ Thumbs.db
 .codex
 
 **/version.ts
+
+.claude/worktrees
+.claude/settings.local.json
