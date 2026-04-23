@@ -1,0 +1,7 @@
+{
+  "name": "platform-sdk",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/sdk/src",
+  "tags": ["scope:platform", "type:sdk", "framework:agnostic"]
+}

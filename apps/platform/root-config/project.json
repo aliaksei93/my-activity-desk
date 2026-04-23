@@ -1,0 +1,29 @@
+{
+  "name": "root-config",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/platform/root-config/src",
+  "tags": ["scope:platform", "type:platform", "framework:agnostic"],
+  "targets": {
+    "serve-host": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx vite --config apps/platform/root-config/vite.config.mts --host localhost --port 4200"
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": true,
+        "commands": [
+          "npx nx run root-config:serve-host",
+          "npx nx run board:serve",
+          "npx nx run profile:serve",
+          "npx nx run notes:serve"
+        ]
+      }
+    }
+  }
+}

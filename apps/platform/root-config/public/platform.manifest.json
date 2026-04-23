@@ -1,0 +1,35 @@
+{
+  "board": {
+    "key": "board",
+    "displayName": "Board",
+    "description": "Angular board application whose main browser bundle is consumed directly by the platform host.",
+    "framework": "angular",
+    "routePath": "/board",
+    "entry": "http://localhost:4201/main.js",
+    "devEntry": "http://localhost:4201/main.js",
+    "exportName": "mount",
+    "preload": true
+  },
+  "profile": {
+    "key": "profile",
+    "displayName": "Profile",
+    "description": "React remote bundled with Vite and consumed as a plain ESM module by the host.",
+    "framework": "react",
+    "routePath": "/profile",
+    "entry": "http://localhost:4202/remote-entry.js",
+    "devEntry": "http://localhost:4202/src/remote-entry.tsx",
+    "exportName": "mount",
+    "preload": true
+  },
+  "notes": {
+    "key": "notes",
+    "displayName": "Notes",
+    "description": "Vue remote that uses the same mount/unmount boundary as every other remote in the workspace.",
+    "framework": "vue",
+    "routePath": "/notes",
+    "entry": "http://localhost:4203/remote-entry.js",
+    "devEntry": "http://localhost:4203/src/remote-entry.ts",
+    "exportName": "mount",
+    "preload": true
+  }
+}

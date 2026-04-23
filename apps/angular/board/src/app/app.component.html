@@ -1,0 +1,62 @@
+<div class="board-shell">
+  <header class="board-hero">
+    <div class="board-hero-copy">
+      <div class="board-kicker">{{ environment.appName }}</div>
+      <h1>Angular board with a normal app shell and real routes.</h1>
+      <p>
+        This app now has a conventional `AppComponent`, dedicated route config and simple feature pages, while still
+        working as the platform remote.
+      </p>
+    </div>
+
+    <div class="board-hero-meta">
+      <span class="board-mode-chip">{{ runtime.mode }}</span>
+      <strong>{{ environment.tagline }}</strong>
+      <small>{{ environment.description }}</small>
+    </div>
+  </header>
+
+  <nav class="board-nav" aria-label="Board sections">
+    @for (item of navItems; track item.path) {
+      <button
+        type="button"
+        class="board-nav-item"
+        [routerLink]="item.path"
+        routerLinkActive="board-nav-item-active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <span>{{ item.label }}</span>
+        <small>{{ item.description }}</small>
+      </button>
+    }
+  </nav>
+
+  <section class="board-layout">
+    <aside class="board-sidebar">
+      <section class="board-sidebar-card">
+        <div class="board-sidebar-kicker">Why this structure</div>
+        <h2>Less special casing, more obvious Angular conventions.</h2>
+        <p>
+          The board now uses one browser bundle for both standalone mode and host consumption, so the actual UI lives
+          behind the same root shell in both modes.
+        </p>
+      </section>
+
+      <section class="board-sidebar-card">
+        <div class="board-sidebar-kicker">Runtime snapshot</div>
+        <div class="board-highlight-list">
+          @for (highlight of highlights; track highlight.label) {
+            <article class="board-highlight-card">
+              <span>{{ highlight.label }}</span>
+              <strong>{{ highlight.value }}</strong>
+              <p>{{ highlight.hint }}</p>
+            </article>
+          }
+        </div>
+      </section>
+    </aside>
+
+    <main class="board-main">
+      <router-outlet></router-outlet>
+    </main>
+  </section>
+</div>

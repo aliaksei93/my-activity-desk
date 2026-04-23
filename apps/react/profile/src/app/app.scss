@@ -1,0 +1,70 @@
+.profile-card {
+  background:
+    linear-gradient(135deg, rgb(14 165 233 / 16%), rgb(59 130 246 / 6%)),
+    rgb(255 255 255 / 84%);
+  border: 1px solid rgb(29 78 216 / 16%);
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgb(29 78 216 / 12%);
+  padding: 1.5rem;
+}
+
+.profile-kicker {
+  color: #1d4ed8;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.profile-title {
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0 0 0.75rem;
+}
+
+.profile-copy {
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.profile-meta {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: minmax(0, max-content) 1fr;
+  margin: 0 0 1.25rem;
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.profile-button {
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.8rem 1.1rem;
+
+  &-primary {
+    background: #1d4ed8;
+    border: 0;
+    color: #fff;
+  }
+
+  &-secondary {
+    background: transparent;
+    border: 1px solid rgb(29 78 216 / 28%);
+    color: #1e3a8a;
+  }
+}

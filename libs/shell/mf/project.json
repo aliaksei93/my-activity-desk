@@ -1,7 +1,0 @@
-{
-  "name": "shell-mf",
-  "sourceRoot": "libs/shell/mf/src",
-  "projectType": "library",
-  "targets": {},
-  "tags": ["scope:shell", "type:mf"]
-}

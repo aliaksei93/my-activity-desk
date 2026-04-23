@@ -1,0 +1,288 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+
+  --surface: #f3efe4;
+  --surface-strong: #efe6d4;
+  --panel: rgb(255 255 255 / 72%);
+  --panel-border: rgb(60 48 27 / 12%);
+  --ink: #1d1c18;
+  --muted: #675d4b;
+  --accent: #154c79;
+  --accent-soft: #dbe7f2;
+  --error: #9a3412;
+  --shadow: 0 20px 60px rgb(39 29 12 / 12%);
+
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgb(255 255 255 / 80%), transparent 32%),
+    linear-gradient(135deg, #f7f2e8 0%, #ebe4d2 100%);
+  color: var(--ink);
+}
+
+code,
+pre {
+  font-family: "IBM Plex Mono", SFMono-Regular, monospace;
+}
+
+a {
+  color: inherit;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.platform-shell {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.platform-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+  background: rgb(245 239 226 / 90%);
+  border-right: 1px solid rgb(29 28 24 / 8%);
+}
+
+.platform-mark {
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+  text-decoration: none;
+}
+
+.platform-mark strong,
+.platform-card h2,
+.platform-header h1 {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.platform-mark span {
+  display: block;
+}
+
+.platform-mark span span {
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.platform-mark-dot {
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-top: 0.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0f766e, #154c79);
+  box-shadow: 0 0 0 8px rgb(21 76 121 / 8%);
+}
+
+.platform-nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.platform-nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.platform-nav-link:hover {
+  transform: translateX(4px);
+  border-color: var(--panel-border);
+  background: rgb(255 255 255 / 40%);
+}
+
+.platform-nav-link[data-active='true'] {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.platform-nav-link small {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.72;
+}
+
+.platform-rail-panel,
+.platform-card,
+.platform-header-badge {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.platform-rail-panel {
+  padding: 1rem;
+  border-radius: 22px;
+  color: var(--muted);
+}
+
+.platform-panel-kicker,
+.platform-card-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.platform-event-feed {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.platform-event-empty {
+  margin: 0;
+}
+
+.platform-event-line {
+  padding: 0.875rem;
+  border-radius: 16px;
+  background: rgb(21 76 121 / 8%);
+}
+
+.platform-event-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.platform-event-line pre {
+  margin: 0;
+  white-space: pre-wrap;
+  color: var(--muted);
+}
+
+.platform-stage {
+  padding: 2rem;
+}
+
+.platform-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.platform-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  max-width: 16ch;
+  line-height: 1;
+}
+
+.platform-header-badge {
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  min-width: 180px;
+}
+
+.platform-header-badge span,
+.platform-header-badge strong {
+  display: block;
+}
+
+.platform-header-badge span {
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.platform-viewport {
+  min-height: calc(100vh - 8rem);
+}
+
+.platform-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.platform-card {
+  padding: 1.25rem;
+  border-radius: 24px;
+}
+
+.platform-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+}
+
+.platform-card p,
+.platform-card li {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.platform-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  text-decoration-thickness: 2px;
+}
+
+.platform-card-hero {
+  grid-column: span 3;
+  background:
+    linear-gradient(120deg, rgb(21 76 121 / 12%), rgb(15 118 110 / 8%)),
+    rgb(255 255 255 / 72%);
+}
+
+.platform-card-error {
+  border-color: rgb(154 52 18 / 20%);
+  background: rgb(255 248 244 / 88%);
+}
+
+.platform-card-error .platform-card-kicker {
+  color: var(--error);
+}
+
+.platform-card-error pre {
+  padding: 0.875rem;
+  border-radius: 14px;
+  background: rgb(154 52 18 / 8%);
+  overflow-x: auto;
+}
+
+@media (width <= 960px) {
+  .platform-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-card-hero {
+    grid-column: span 1;
+  }
+
+  .platform-header {
+    flex-direction: column;
+  }
+}

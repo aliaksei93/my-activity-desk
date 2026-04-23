@@ -5,10 +5,10 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist', '**/out-tsc'],
+    ignores: ['**/dist', '**/out-tsc', '**/vite.config.*.timestamp*'],
   },
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
     rules: {
       '@nx/enforce-module-boundaries': [
         'error',
@@ -16,6 +16,63 @@ export default [
           enforceBuildableLibDependency: true,
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
           depConstraints: [
+            {
+              sourceTag: 'type:platform',
+              onlyDependOnLibsWithTags: [
+                'type:contracts',
+                'type:sdk',
+                'type:tokens',
+                'framework:agnostic',
+              ],
+            },
+            {
+              sourceTag: 'type:sdk',
+              onlyDependOnLibsWithTags: [
+                'type:contracts',
+                'type:sdk',
+                'type:tokens',
+                'framework:agnostic',
+              ],
+            },
+            {
+              sourceTag: 'type:contracts',
+              onlyDependOnLibsWithTags: ['type:contracts', 'framework:agnostic'],
+            },
+            {
+              sourceTag: 'framework:react',
+              onlyDependOnLibsWithTags: [
+                'framework:react',
+                'type:contracts',
+                'type:sdk',
+                'type:tokens',
+                'framework:agnostic',
+              ],
+            },
+            {
+              sourceTag: 'framework:vue',
+              onlyDependOnLibsWithTags: [
+                'framework:vue',
+                'type:contracts',
+                'type:sdk',
+                'type:tokens',
+                'framework:agnostic',
+              ],
+            },
+            {
+              sourceTag: 'framework:angular',
+              onlyDependOnLibsWithTags: [
+                'framework:angular',
+                'type:contracts',
+                'type:sdk',
+                'type:tokens',
+                'framework:agnostic',
+                'type:mf',
+              ],
+            },
+            {
+              sourceTag: 'type:lab',
+              onlyDependOnLibsWithTags: ['*'],
+            },
             {
               sourceTag: '*',
               onlyDependOnLibsWithTags: ['*'],
@@ -29,6 +86,7 @@ export default [
     files: [
       '**/*.ts',
       '**/*.tsx',
+      '**/*.vue',
       '**/*.cts',
       '**/*.mts',
       '**/*.js',

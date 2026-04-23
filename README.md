@@ -62,7 +62,7 @@ Nx Console is an editor extension that enriches your developer experience. It le
 
 ## Workspace Docs
 
-- [Angular migration rules](docs/angular-migration-rules.md)
+- [Angular and ESM migration rules](docs/angular-migration-rules.md)
 - [UI library handover](docs/ui-library-handover.md)
 - [UI library plan](docs/ui-library-plan.md)
 

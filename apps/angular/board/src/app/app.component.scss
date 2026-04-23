@@ -1,0 +1,233 @@
+.board-shell {
+  margin: 0 auto;
+  max-width: 1240px;
+  padding: 2rem;
+}
+
+.board-hero {
+  align-items: start;
+  background:
+    linear-gradient(135deg, rgb(15 95 97 / 92%), rgb(20 33 61 / 92%)),
+    rgb(255 255 255 / 92%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 32px;
+  color: #f7fafc;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.board-hero::after {
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 24%) 0%, rgb(255 255 255 / 0%) 70%);
+  content: '';
+  height: 240px;
+  position: absolute;
+  right: -40px;
+  top: -80px;
+  width: 240px;
+}
+
+.board-hero-copy,
+.board-hero-meta {
+  position: relative;
+  z-index: 1;
+}
+
+.board-kicker {
+  color: rgb(244 184 96 / 100%);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.board-hero h1 {
+  font-size: clamp(2.3rem, 4vw, 3.6rem);
+  letter-spacing: -0.05em;
+  line-height: 0.96;
+  margin: 0;
+  max-width: 10ch;
+}
+
+.board-hero p {
+  color: rgb(226 232 240 / 92%);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 1rem 0 0;
+  max-width: 58ch;
+}
+
+.board-hero-meta {
+  align-self: stretch;
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 24px;
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.25rem;
+}
+
+.board-hero-meta strong {
+  font-size: 1.15rem;
+}
+
+.board-hero-meta small {
+  color: rgb(226 232 240 / 84%);
+  line-height: 1.6;
+}
+
+.board-mode-chip {
+  align-items: center;
+  background: rgb(244 184 96 / 18%);
+  border: 1px solid rgb(244 184 96 / 36%);
+  border-radius: 999px;
+  color: rgb(255 248 236 / 100%);
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 700;
+  justify-self: start;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.7rem;
+  text-transform: uppercase;
+}
+
+.board-nav {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.25rem;
+}
+
+.board-nav-item {
+  background: rgb(255 255 255 / 76%);
+  border: 1px solid rgb(20 33 61 / 10%);
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgb(20 33 61 / 6%);
+  color: inherit;
+  cursor: pointer;
+  display: grid;
+  gap: 0.35rem;
+  min-height: 100px;
+  padding: 1rem 1.1rem;
+  text-align: left;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.board-nav-item span {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.board-nav-item small {
+  color: rgb(82 96 109 / 100%);
+  line-height: 1.5;
+}
+
+.board-nav-item:hover,
+.board-nav-item:focus-visible {
+  border-color: rgb(15 95 97 / 28%);
+  box-shadow: 0 18px 38px rgb(15 95 97 / 12%);
+  transform: translateY(-2px);
+}
+
+.board-nav-item-active {
+  background: rgb(15 95 97 / 8%);
+  border-color: rgb(15 95 97 / 28%);
+}
+
+.board-layout {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  margin-top: 1.25rem;
+}
+
+.board-sidebar {
+  display: grid;
+  gap: 1rem;
+  align-self: start;
+}
+
+.board-sidebar-card {
+  background: rgb(255 255 255 / 80%);
+  border: 1px solid rgb(20 33 61 / 8%);
+  border-radius: 28px;
+  box-shadow: 0 18px 44px rgb(20 33 61 / 8%);
+  padding: 1.25rem;
+}
+
+.board-sidebar-kicker {
+  color: rgb(15 95 97 / 100%);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+}
+
+.board-sidebar-card h2 {
+  font-size: 1.35rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.board-sidebar-card p {
+  color: rgb(82 96 109 / 100%);
+  line-height: 1.7;
+  margin: 0.85rem 0 0;
+}
+
+.board-highlight-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.board-highlight-card {
+  background: rgb(243 247 242 / 90%);
+  border-radius: 20px;
+  padding: 0.95rem 1rem;
+}
+
+.board-highlight-card span {
+  color: rgb(82 96 109 / 100%);
+  display: block;
+  font-size: 0.82rem;
+}
+
+.board-highlight-card strong {
+  display: block;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+
+.board-highlight-card p {
+  margin-top: 0.45rem;
+}
+
+.board-main {
+  min-width: 0;
+}
+
+@media (width <= 980px) {
+  .board-shell {
+    padding: 1rem;
+  }
+
+  .board-hero,
+  .board-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .board-nav {
+    grid-template-columns: 1fr;
+  }
+}

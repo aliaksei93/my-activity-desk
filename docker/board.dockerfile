@@ -17,9 +17,6 @@ COPY tools ./tools
 
 RUN npm ci
 
-RUN cp ./tools/set-env.board.ts ./set-env.ts
-RUN npx ts-node --transpile-only --compiler-options '{"module":"CommonJS"}' ./set-env.ts --trace-warnings
-
 # build app
 RUN npx nx build board --configuration=production
 

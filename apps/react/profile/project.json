@@ -1,0 +1,9 @@
+{
+  "name": "profile",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react/profile/src",
+  "projectType": "application",
+  "tags": ["scope:platform", "type:remote", "framework:react"],
+  "// targets": "to see all targets run: nx show project profile --web",
+  "targets": {}
+}

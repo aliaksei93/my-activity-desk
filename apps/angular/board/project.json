@@ -4,18 +4,24 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/angular/board/src",
-  "tags": [],
+  "tags": ["scope:platform", "type:remote", "framework:angular"],
   "targets": {
     "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{workspaceRoot}/dist/apps/angular/board"],
       "options": {
-        "outputPath": "dist/apps/angular/board",
-        "index": "apps/angular/board/src/index.html",
-        "main": "apps/angular/board/src/main.ts",
-        "polyfills": ["zone.js"],
+        "outputPath": {
+          "base": "dist/apps/angular/board",
+          "browser": "."
+        },
+        "index": {
+          "input": "apps/angular/board/src/index.html",
+          "output": "index.html"
+        },
+        "browser": "apps/angular/board/src/main.ts",
+        "server": false,
         "tsConfig": "apps/angular/board/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "polyfills": ["zone.js"],
         "assets": [
           {
             "glob": "**/*",
@@ -26,9 +32,7 @@
         "stylePreprocessorOptions": {
           "includePaths": ["libs/design/tokens/src/styles"]
         },
-        "customWebpackConfig": {
-          "path": "apps/angular/board/webpack.config.ts"
-        }
+        "inlineStyleLanguage": "scss"
       },
       "configurations": {
         "production": {
@@ -44,28 +48,32 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all",
-          "customWebpackConfig": {
-            "path": "apps/angular/board/webpack.prod.config.ts"
-          }
+          "outputHashing": "none"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "fileReplacements": [
+            {
+              "replace": "apps/angular/board/src/environments/environment.ts",
+              "with": "apps/angular/board/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/angular:dev-server",
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
+        "buildTarget": "board:build:development",
         "port": 4201,
-        "publicHost": "http://localhost:4201"
+        "host": "localhost",
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
       },
       "configurations": {
         "production": {
@@ -76,12 +84,6 @@
         }
       },
       "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "board:build"
-      }
     },
     "lint": {
       "executor": "@nx/eslint:lint"
