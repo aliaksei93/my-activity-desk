@@ -10,7 +10,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_SHELL: my-desk-shell-frontend
+  # Keep the existing GHCR package and OMV compose service name until server compose is renamed.
+  IMAGE_ROOT_CONFIG: my-desk-shell-frontend
   IMAGE_BOARD: my-desk-board-frontend
 
 jobs:
@@ -36,15 +37,15 @@ jobs:
       - name: Lint styles
         run: npm run lint:styles
 
-      - name: Lint shell & board
+      - name: Lint applications
         run: |
-          npx nx lint shell
+          npx nx lint root-config
           npx nx lint board
+          npx nx lint profile
+          npx nx lint notes
 
-      - name: Test shell & board
-        run: |
-          npx nx test shell --ci --code-coverage=false
-          npx nx test board --ci --code-coverage=false
+      - name: Test board
+        run: npx nx test board
 
   # ---------- CI/CD for tags ----------
   build-and-deploy:
@@ -73,21 +74,23 @@ jobs:
       - name: Lint styles
         run: npm run lint:styles
 
-      - name: Lint shell & board
+      - name: Lint applications
         run: |
-          npx nx lint shell
+          npx nx lint root-config
           npx nx lint board
+          npx nx lint profile
+          npx nx lint notes
 
-      - name: Test shell & board
-        run: |
-          npx nx test shell --ci --code-coverage=false
-          npx nx test board --ci --code-coverage=false
+      - name: Test board
+        run: npx nx test board --configuration=ci
 
       # Optional: build before Docker (boost debug)
-      - name: Build shell & board
+      - name: Build applications
         run: |
-          npx nx build shell --configuration=production
           npx nx build board --configuration=production
+          npx nx build root-config
+          npx nx build profile
+          npx nx build notes
 
       # ----- Docker login to GHCR -----
       - name: Log in to GHCR
@@ -103,18 +106,18 @@ jobs:
           VERSION="${GITHUB_REF#refs/tags/}"
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Build and push shell image
+      - name: Build and push root-config image
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: docker/shell.dockerfile
+          file: docker/root-config.dockerfile
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_SHELL }}:${{ steps.meta.outputs.VERSION }}
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_SHELL }}:latest
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_ROOT_CONFIG }}:${{ steps.meta.outputs.VERSION }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_ROOT_CONFIG }}:latest
           build-args: |
-            APP_NAME=shell
             GIT_COMMIT=${{ github.sha }}
+            GIT_REF=${{ github.ref_name }}
 
       - name: Build and push board image
         uses: docker/build-push-action@v6
@@ -126,7 +129,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_BOARD }}:${{ steps.meta.outputs.VERSION }}
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_BOARD }}:latest
           build-args: |
-            APP_NAME=board
+            GIT_COMMIT=${{ github.sha }}
+            GIT_REF=${{ github.ref_name }}
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
@@ -137,6 +141,6 @@ jobs:
           key: ${{ secrets.OMV_SSH_KEY }}
           script: |
             cd ${{ secrets.OMV_DOCKER_COMPOSE_PATH }}
-            docker compose --env-file my-desk-frontend.env -f my-desk-frontend.yml pull my-desk-shell-frontend my-desk-board-frontend
-            docker compose --env-file my-desk-frontend.env -f my-desk-frontend.yml up -d my-desk-shell-frontend my-desk-board-frontend
+            docker compose --env-file my-desk-frontend.env -f my-desk-frontend.yml pull ${{ env.IMAGE_ROOT_CONFIG }} ${{ env.IMAGE_BOARD }}
+            docker compose --env-file my-desk-frontend.env -f my-desk-frontend.yml up -d ${{ env.IMAGE_ROOT_CONFIG }} ${{ env.IMAGE_BOARD }}
             docker exec nginx-proxy nginx -s reload

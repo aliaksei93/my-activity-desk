@@ -88,8 +88,7 @@ libs/
   - `libs/react/*`
   - `libs/vue/*`
 - Moved Storybook host into `apps/storybook/angular`.
-- Updated app-level style entrypoints to consume `libs/design/tokens` instead of Angular-local styles:
-  - `apps/angular/shell/src/styles.scss`
+- Updated the board app style entrypoint to consume `libs/design/tokens` instead of Angular-local styles:
   - `apps/angular/board/src/styles.scss`
 - Updated TypeScript path aliases in `tsconfig.base.json` for direct framework domain entrypoints.
 
@@ -127,10 +126,9 @@ Normal environment:
 
 - `npx nx run storybook-angular:storybook --open=false`
 - `npx nx run storybook-angular:build-storybook:ci`
-- `npx nx build shell --configuration development`
+- `npx nx build root-config`
 - `npx nx build board --configuration development`
-- `npx nx test shell --runInBand`
-- `npx nx test board --runInBand`
+- `npx nx test board`
 
 Sandboxed environment:
 
@@ -139,18 +137,18 @@ Sandboxed environment:
 
 ## Verified During This Session
 
-The following commands were verified on 2026-04-06:
+The following commands were verified on 2026-04-24:
 
 - `git diff --check`
 - `npx tsc -p apps/storybook/angular/tsconfig.json --noEmit`
 - `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx show project storybook-angular`
 - `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx run storybook-angular:build-storybook:ci`
-- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx build shell --configuration development`
+- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx build root-config`
 - `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx build board --configuration development`
-- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx test shell --runInBand`
-- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx test board --runInBand`
-- `npx sass apps/angular/shell/src/styles.scss /tmp/shell-styles.css`
+- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx test board`
 - `npx sass apps/angular/board/src/styles.scss /tmp/board-styles.css`
+
+Note: `board:build` and `board:serve` now run `board:set-version` first, so `apps/angular/board/public/version.json` is generated as part of the normal Nx task lifecycle.
 
 Live verification:
 

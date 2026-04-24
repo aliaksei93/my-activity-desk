@@ -18,12 +18,12 @@ Date: 2026-04-08
 
 - `npx nx run storybook-angular:storybook --open=false`
 - `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx run storybook-angular:build-storybook:ci`
-- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx build shell --configuration development`
+- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx build root-config`
 - `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx build board --configuration development`
-- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx test shell --runInBand`
-- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx test board --runInBand`
+- `NX_ISOLATE_PLUGINS=false NX_DAEMON=false npx nx test board`
 
 Storybook Angular dev server is configured for `http://localhost:4600/`.
+Board build and serve tasks run `board:set-version` before Angular starts, so `apps/angular/board/public/version.json` is generated during normal Nx workflows.
 
 ## Next Steps
 

@@ -5,5 +5,12 @@
   "sourceRoot": "apps/vue/notes/src",
   "tags": ["scope:platform", "type:remote", "framework:vue"],
   "// targets": "to see all targets run: nx show project notes --web",
-  "targets": {}
+  "targets": {
+    "set-version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/set-version.js notes"
+      }
+    }
+  }
 }

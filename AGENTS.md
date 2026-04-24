@@ -47,7 +47,7 @@
 
 ## Testing Guidelines
 
-- Unit tests use Jest with `jest-preset-angular` and live alongside code as `*.spec.ts`.
+- Unit tests use Vitest and live alongside code as `*.spec.ts`.
 - Coverage outputs to `coverage/apps/angular/<project>`.
 - React/Vue remotes currently rely on lint/build validation; add framework-specific tests alongside new features.
 

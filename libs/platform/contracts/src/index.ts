@@ -39,10 +39,7 @@ export type MountedRemote = {
   update?: (context: PlatformContext) => void | Promise<void>;
 };
 
-export type RemoteMount = (
-  container: HTMLElement,
-  context: PlatformContext,
-) => MountedRemote | Promise<MountedRemote>;
+export type RemoteMount = (container: HTMLElement, context: PlatformContext) => MountedRemote | Promise<MountedRemote>;
 
 export type RemoteManifestEntry = {
   key: string;
@@ -53,6 +50,7 @@ export type RemoteManifestEntry = {
   preload?: boolean;
   entry: string;
   devEntry?: string;
+  versionUrl?: string;
   exportName?: string;
 };
 

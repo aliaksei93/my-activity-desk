@@ -47,6 +47,7 @@ Thumbs.db
 .codex
 
 **/version.ts
+apps/**/public/version.json
 
 .claude/worktrees
 .claude/settings.local.json

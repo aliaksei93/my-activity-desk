@@ -4,8 +4,11 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+import versionMetadata from '../../../tools/version-metadata.js';
 
-export default defineConfig(() => ({
+const { createVersionPlugin } = versionMetadata;
+
+export default defineConfig({
   root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/apps/vue/notes',
   server: {
@@ -16,7 +19,7 @@ export default defineConfig(() => ({
     port: 4203,
     host: 'localhost',
   },
-  plugins: [vue(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+  plugins: [createVersionPlugin('notes'), vue(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
   build: {
     outDir: '../../../dist/apps/vue/notes',
     emptyOutDir: true,
@@ -32,4 +35,4 @@ export default defineConfig(() => ({
       transformMixedEsModules: true,
     },
   },
-}));
+});

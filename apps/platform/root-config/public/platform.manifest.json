@@ -7,6 +7,7 @@
     "routePath": "/board",
     "entry": "http://localhost:4201/main.js",
     "devEntry": "http://localhost:4201/main.js",
+    "versionUrl": "http://localhost:4201/version.json",
     "exportName": "mount",
     "preload": true
   },
@@ -18,6 +19,7 @@
     "routePath": "/profile",
     "entry": "http://localhost:4202/remote-entry.js",
     "devEntry": "http://localhost:4202/src/remote-entry.tsx",
+    "versionUrl": "http://localhost:4202/version.json",
     "exportName": "mount",
     "preload": true
   },
@@ -29,6 +31,7 @@
     "routePath": "/notes",
     "entry": "http://localhost:4203/remote-entry.js",
     "devEntry": "http://localhost:4203/src/remote-entry.ts",
+    "versionUrl": "http://localhost:4203/version.json",
     "exportName": "mount",
     "preload": true
   }

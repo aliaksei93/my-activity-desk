@@ -5,6 +5,12 @@
   "sourceRoot": "apps/platform/root-config/src",
   "tags": ["scope:platform", "type:platform", "framework:agnostic"],
   "targets": {
+    "set-version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/set-version.js root-config"
+      }
+    },
     "serve-host": {
       "continuous": true,
       "executor": "nx:run-commands",

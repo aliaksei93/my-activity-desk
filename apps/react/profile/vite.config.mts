@@ -4,8 +4,11 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+import versionMetadata from '../../../tools/version-metadata.js';
 
-export default defineConfig(() => ({
+const { createVersionPlugin } = versionMetadata;
+
+export default defineConfig({
   root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/apps/react/profile',
   server: {
@@ -16,7 +19,7 @@ export default defineConfig(() => ({
     port: 4202,
     host: 'localhost',
   },
-  plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+  plugins: [createVersionPlugin('profile'), react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
   build: {
     outDir: '../../../dist/apps/react/profile',
     emptyOutDir: true,
@@ -33,6 +36,6 @@ export default defineConfig(() => ({
     },
   },
   define: {
-    'import.meta.vitest': undefined
+    'import.meta.vitest': undefined,
   },
-}));
+});
