@@ -36,7 +36,7 @@
 - Indentation: 2 spaces (see `.editorconfig`).
 - Language: TypeScript for app/lib code, CSS/SCSS for styles.
 - Use kebab-case for project and folder names.
-- Format with Prettier (`.prettierrc`) and lint with ESLint (`eslint.config.mjs`).
+- Format with Prettier (`.prettierrc`) and lint with ESLint (`eslint.config.js`).
 
 ## Angular Template Syntax
 

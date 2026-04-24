@@ -1,10 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import { execSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const workspaceRoot = path.resolve(__dirname, '..');
+const toolsDir = path.dirname(fileURLToPath(import.meta.url));
+const workspaceRoot = path.resolve(toolsDir, '..');
 
-const projects = {
+export const projects = {
   board: {
     appPath: 'apps/angular/board',
     publicPath: 'apps/angular/board/public',
@@ -43,7 +45,7 @@ const readGitValue = (command) => {
   }
 };
 
-const createVersion = (projectName, explicitCommit) => {
+export const createVersion = (projectName, explicitCommit) => {
   const project = projects[projectName];
 
   if (!project) {
@@ -81,7 +83,7 @@ const createVersion = (projectName, explicitCommit) => {
   };
 };
 
-const writeVersionFile = (projectName, explicitCommit) => {
+export const writeVersionFile = (projectName, explicitCommit) => {
   const project = projects[projectName];
 
   if (!project) {
@@ -99,7 +101,7 @@ const writeVersionFile = (projectName, explicitCommit) => {
   return outFile;
 };
 
-const createVersionPlugin = (projectName) => ({
+export const createVersionPlugin = (projectName) => ({
   name: 'my-activity-desk-version',
   buildStart() {
     writeVersionFile(projectName);
@@ -109,10 +111,4 @@ const createVersionPlugin = (projectName) => ({
   },
 });
 
-module.exports = {
-  createVersion,
-  createVersionPlugin,
-  projects,
-  writeVersionFile,
-  workspaceRoot,
-};
+export { workspaceRoot };

@@ -14,25 +14,15 @@ export default [
         'error',
         {
           enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
+          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$', '^../../../tools/version-metadata\\.js$'],
           depConstraints: [
             {
               sourceTag: 'type:platform',
-              onlyDependOnLibsWithTags: [
-                'type:contracts',
-                'type:sdk',
-                'type:tokens',
-                'framework:agnostic',
-              ],
+              onlyDependOnLibsWithTags: ['type:contracts', 'type:sdk', 'type:tokens', 'framework:agnostic'],
             },
             {
               sourceTag: 'type:sdk',
-              onlyDependOnLibsWithTags: [
-                'type:contracts',
-                'type:sdk',
-                'type:tokens',
-                'framework:agnostic',
-              ],
+              onlyDependOnLibsWithTags: ['type:contracts', 'type:sdk', 'type:tokens', 'framework:agnostic'],
             },
             {
               sourceTag: 'type:contracts',
@@ -83,17 +73,7 @@ export default [
     },
   },
   {
-    files: [
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.vue',
-      '**/*.cts',
-      '**/*.mts',
-      '**/*.js',
-      '**/*.jsx',
-      '**/*.cjs',
-      '**/*.mjs',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.vue', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
     // Override or add rules here
     rules: {},
   },

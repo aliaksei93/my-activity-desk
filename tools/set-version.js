@@ -1,5 +1,5 @@
-const path = require('path');
-const { projects, workspaceRoot, writeVersionFile } = require('./version-metadata');
+import path from 'node:path';
+import { projects, workspaceRoot, writeVersionFile } from './version-metadata.js';
 
 const projectName = process.argv[2];
 const explicitCommit = process.argv[3];

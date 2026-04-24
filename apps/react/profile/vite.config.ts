@@ -4,9 +4,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
-import versionMetadata from '../../../tools/version-metadata.js';
-
-const { createVersionPlugin } = versionMetadata;
+import { createVersionPlugin } from '../../../tools/version-metadata.js';
 
 export default defineConfig({
   root: import.meta.dirname,

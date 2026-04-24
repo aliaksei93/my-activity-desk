@@ -15,7 +15,7 @@
       "continuous": true,
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx vite --config apps/platform/root-config/vite.config.mts --host localhost --port 4200"
+        "command": "npx vite --config apps/platform/root-config/vite.config.ts --host localhost --port 4200"
       }
     },
     "serve": {

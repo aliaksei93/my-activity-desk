@@ -1,6 +1,7 @@
 {
   "name": "@my-activity-desk/source",
   "version": "0.0.0",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "lint:commits": "commitlint --from HEAD~1 --to HEAD --verbose",
