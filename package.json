@@ -4,6 +4,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
+    "lint": "npm run lint:code && npm run lint:styles",
+    "lint:code": "nx run-many -t lint",
     "lint:commits": "commitlint --from HEAD~1 --to HEAD --verbose",
     "lint:staged": "lint-staged --relative",
     "lint:styles": "stylelint \"{apps,libs}/**/*.{scss,css}\"",

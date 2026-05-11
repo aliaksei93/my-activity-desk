@@ -34,15 +34,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint styles
-        run: npm run lint:styles
-
-      - name: Lint applications
-        run: |
-          npx nx lint root-config
-          npx nx lint board
-          npx nx lint profile
-          npx nx lint notes
+      - name: Lint workspace
+        run: npm run lint
 
       - name: Test board
         run: npx nx test board
@@ -71,15 +64,8 @@ jobs:
         run: npm ci
 
       # Lint + Test
-      - name: Lint styles
-        run: npm run lint:styles
-
-      - name: Lint applications
-        run: |
-          npx nx lint root-config
-          npx nx lint board
-          npx nx lint profile
-          npx nx lint notes
+      - name: Lint workspace
+        run: npm run lint
 
       - name: Test board
         run: npx nx test board --configuration=ci
